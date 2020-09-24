@@ -12,9 +12,20 @@ package modelo;
  */
 public class Usuario {
     
+    private String login;
     private int codigo;
     private String desc_produto;
     private Double preco;
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    
+    
 
     public int getCodigo() {
         return codigo;

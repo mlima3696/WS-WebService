@@ -33,13 +33,14 @@ public class UsuarioDAO {
     
     public boolean inserir(Usuario usuario)
     {
-        String sql = "INSERT INTO  produtos (codigo,desc_produto,preco) VALUES(?,?,?)";
+        String sql = "INSERT INTO  zy (login,codigo,desc_produto,preco) VALUES(?,?,?)";
         Boolean retorno = false;
         PreparedStatement pst = Conexao.getPreparedStatement(sql);
         try {
-            pst.setInt(1, usuario.getCodigo());
-            pst.setString(2, usuario.getDesc_produto());
-            pst.setDouble(3, usuario.getPreco());
+            pst.setString(1, usuario.getLogin());
+            pst.setInt(2, usuario.getCodigo());
+            pst.setString(3, usuario.getDesc_produto());
+            pst.setDouble(4, usuario.getPreco());
             
             
             if(pst.executeUpdate()>0)
@@ -59,14 +60,15 @@ public class UsuarioDAO {
     }
     public boolean atualizar(Usuario usuario)
     {
-        String sql = "UPDATE  produtos set codigo=?,desc_produto=?,preco=? where codigo=?";
+        String sql = "UPDATE  zy set login=? codigo=?,desc_produto=?,preco=? where codigo=?";
         Boolean retorno = false;
         PreparedStatement pst = Conexao.getPreparedStatement(sql);
         try {
           
-            pst.setInt(1, usuario.getCodigo());
-            pst.setString(2, usuario.getDesc_produto());
-            pst.setDouble(3, usuario.getPreco());
+            pst.setString(1, usuario.getLogin());
+            pst.setInt(2, usuario.getCodigo());
+            pst.setString(3, usuario.getDesc_produto());
+            pst.setDouble(4, usuario.getPreco());
             
             if(pst.executeUpdate()>0)
             {
@@ -111,8 +113,8 @@ public class UsuarioDAO {
     
     public List<Usuario> listar()
     {
-         String sql = "SELECT * FROM produtos";
-        List<Usuario> retorno = new ArrayList<Usuario>();
+         String sql = "SELECT * FROM zy";
+        List<Usuario> retorno = new ArrayList<>();
         
         PreparedStatement pst = Conexao.getPreparedStatement(sql);
         try {
@@ -122,6 +124,7 @@ public class UsuarioDAO {
             while(res.next())
             {
                 Usuario item = new Usuario();
+                item.setLogin(res.getString("login"));
                 item.setCodigo(res.getInt("codigo"));
                 item.setDesc_produto(res.getString("desc_produto"));
                 item.setPreco(res.getDouble("preco"));
@@ -141,10 +144,10 @@ public class UsuarioDAO {
     
     
     }
-    /*public Usuario buscar(Usuario usuario)
+    public Usuario buscar(Usuario usuario)
     {
-         String sql = "SELECT * FROM usuario where login=?";
-        Usuario retorno = null;
+         String sql = "SELECT * FROM zy where login=?";
+        Usuario retorno = new Usuario();
         
         PreparedStatement pst = Conexao.getPreparedStatement(sql);
         try {
@@ -155,10 +158,10 @@ public class UsuarioDAO {
             if(res.next())
             {
                 retorno = new Usuario();
-                retorno.setLogin(res.getString("login"));
-                retorno.setSenha(res.getString("senha"));
-                retorno.setEmail(res.getString("email"));
-                retorno.setPerfil(res.getString("perfil"));
+               retorno.setLogin(res.getString("login"));
+                retorno.setCodigo(res.getInt("codigo"));
+                retorno.setDesc_produto(res.getString("desc_produto"));
+                retorno.setPreco(res.getDouble("preco"));
                 
                 
             }
@@ -173,7 +176,7 @@ public class UsuarioDAO {
         return retorno;
     
     
-    }*/
+    }
 
 
 }

@@ -16,8 +16,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import modelo.Usuario;
+
+
 
 /**
  * REST Web Service
@@ -50,14 +53,15 @@ public class WS {
 
     @GET
     @Produces("application/json")
-    @Path("Usuario/get")
-    public String getUsuario() {
+    @Path("Usuario/get/{login}")
+    
+    public String getUsuario(@PathParam("login")String login) {
         
         Usuario u=new Usuario();
+        u.setLogin(login);
         
-        u.setCodigo(10);
-        u.setDesc_produto("Celular Maca 10");
-        u.setPreco(3.999);
+        UsuarioDAO dao= new UsuarioDAO();
+        u=dao.buscar(u);
       
         //Converter para Gson
         Gson g=new Gson();
