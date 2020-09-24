@@ -17,7 +17,7 @@ import java.sql.SQLException;
  */
 public class Conexao {
     private static final String banco = 
-            "jdbc:postgresql://localhost:5432/fazenda";
+            "jdbc:postgresql://localhost:5432/ws";
     /**
      * O atributo driver representa a classe do Driver JDBC que será usada na 
      * conexão. Quando se utiliza outros bancos usa-se a classe apropriada a 
@@ -30,7 +30,7 @@ public class Conexao {
      * SGBD a ser usado na conexão
      */
     private static final String usuario = "postgres";
-    private static final String senha = "postgres";  
+    private static final String senha = "admin";  
     /**
      * O atributo con representa um objeto que 
      * contém a conexão com o banco de dados em si

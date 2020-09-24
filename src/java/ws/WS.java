@@ -6,6 +6,7 @@
 package ws;
 
 import com.google.gson.Gson;
+import dao.UsuarioDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.Context;
@@ -24,7 +25,7 @@ import modelo.Usuario;
  * @author ACER
  */
 @Path("fazenda")
-public class FazendaWS {
+public class WS {
 
     @Context
     private UriInfo context;
@@ -32,7 +33,7 @@ public class FazendaWS {
     /**
      * Creates a new instance of FazendaWS
      */
-    public FazendaWS() {
+    public WS() {
     }
 
     /**
@@ -54,41 +55,29 @@ public class FazendaWS {
         
         Usuario u=new Usuario();
         
-        u.setEmail("mlima@gmail.com");
-        u.setLogin("MMM");
-        u.setSenha("123");
-        u.setPerfil("Admin");
-        
+        u.setCodigo(10);
+        u.setDesc_produto("Celular Maca 10");
+        u.setPreco(3.999);
+      
         //Converter para Gson
         Gson g=new Gson();
-        
         return g.toJson(u);
         
         //return "Milton Lima, Login: 123";
     }
     
-     @GET
+    @GET
     @Produces("application/json")
     @Path("Usuario/list")
     public String listUsuario() {
         
-        List<Usuario>lista=new ArrayList<Usuario>();
-        Usuario u=new Usuario();
+        List<Usuario>lista;
         
-        u.setEmail("mlima@gmail.com");
-        u.setLogin("MMM");
-        u.setSenha("123");
-        u.setPerfil("Admin");
-        
-        lista.add(u);
-        
-        u.setEmail("mgomes@gmail.com");
-        u.setLogin("GGG");
-        u.setSenha("1234");
-        u.setPerfil("Usuario");
-        
-        lista.add(u);
-        
+       //UsuarioDAO dao=new UsuarioDAO();
+      // lista=dao.listar();
+        UsuarioDAO dao = new UsuarioDAO();
+       
+        lista=dao.listar();
         //Converter para Gson
         Gson g=new Gson();
         

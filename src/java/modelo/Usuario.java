@@ -12,43 +12,34 @@ package modelo;
  */
 public class Usuario {
     
-    private String login;
-    private String senha;
-    private String email;
-    private String perfil;
+    private int codigo;
+    private String desc_produto;
+    private Double preco;
 
-    public String getLogin() {
-        return login;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getDesc_produto() {
+        return desc_produto;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setDesc_produto(String desc_produto) {
+        this.desc_produto = desc_produto;
     }
 
-    public String getEmail() {
-        return email;
+    public Double getPreco() {
+        return preco;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
     
-    
+
     
 }

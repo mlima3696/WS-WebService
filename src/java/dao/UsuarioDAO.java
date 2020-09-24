@@ -33,14 +33,14 @@ public class UsuarioDAO {
     
     public boolean inserir(Usuario usuario)
     {
-        String sql = "INSERT INTO usuario(login,senha,perfil,email) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO  produtos (codigo,desc_produto,preco) VALUES(?,?,?)";
         Boolean retorno = false;
         PreparedStatement pst = Conexao.getPreparedStatement(sql);
         try {
-            pst.setString(1, usuario.getLogin());
-            pst.setString(2, usuario.getSenha());
-            pst.setString(3, usuario.getPerfil());
-            pst.setString(4, usuario.getEmail());
+            pst.setInt(1, usuario.getCodigo());
+            pst.setString(2, usuario.getDesc_produto());
+            pst.setDouble(3, usuario.getPreco());
+            
             
             if(pst.executeUpdate()>0)
             {
@@ -59,15 +59,15 @@ public class UsuarioDAO {
     }
     public boolean atualizar(Usuario usuario)
     {
-        String sql = "UPDATE usuario set senha=?,perfil=?,email=? where login=?";
+        String sql = "UPDATE  produtos set codigo=?,desc_produto=?,preco=? where codigo=?";
         Boolean retorno = false;
         PreparedStatement pst = Conexao.getPreparedStatement(sql);
         try {
           
-            pst.setString(1, usuario.getSenha());
-            pst.setString(2, usuario.getPerfil());
-            pst.setString(3, usuario.getEmail());
-            pst.setString(4, usuario.getLogin());
+            pst.setInt(1, usuario.getCodigo());
+            pst.setString(2, usuario.getDesc_produto());
+            pst.setDouble(3, usuario.getPreco());
+            
             if(pst.executeUpdate()>0)
             {
                 retorno = true;
@@ -83,7 +83,8 @@ public class UsuarioDAO {
         return retorno;
     
     }
-    public boolean excluir(Usuario usuario)
+    
+    /*public boolean excluir(Usuario usuario)
     {
         String sql = "DELETE FROM usuario where login=?";
         Boolean retorno = false;
@@ -106,11 +107,11 @@ public class UsuarioDAO {
         
         return retorno;
     
-    }
+    }*/
     
     public List<Usuario> listar()
     {
-         String sql = "SELECT * FROM usuario";
+         String sql = "SELECT * FROM produtos";
         List<Usuario> retorno = new ArrayList<Usuario>();
         
         PreparedStatement pst = Conexao.getPreparedStatement(sql);
@@ -121,10 +122,10 @@ public class UsuarioDAO {
             while(res.next())
             {
                 Usuario item = new Usuario();
-                item.setLogin(res.getString("login"));
-                item.setSenha(res.getString("senha"));
-                item.setEmail(res.getString("email"));
-                item.setPerfil(res.getString("perfil"));
+                item.setCodigo(res.getInt("codigo"));
+                item.setDesc_produto(res.getString("desc_produto"));
+                item.setPreco(res.getDouble("preco"));
+                
                 
                 retorno.add(item);
             }
@@ -140,7 +141,7 @@ public class UsuarioDAO {
     
     
     }
-    public Usuario buscar(Usuario usuario)
+    /*public Usuario buscar(Usuario usuario)
     {
          String sql = "SELECT * FROM usuario where login=?";
         Usuario retorno = null;
@@ -172,7 +173,7 @@ public class UsuarioDAO {
         return retorno;
     
     
-    }
+    }*/
 
 
 }
